@@ -20,7 +20,7 @@ class Food{
 
 };
 
-
+Food food;
 
 int main(){
     cout << "Starting Game!" << endl;
@@ -36,7 +36,8 @@ int main(){
         BeginDrawing();
 
         ClearBackground(green);
-
+        food.Draw();
+        
         EndDrawing();
     }
     

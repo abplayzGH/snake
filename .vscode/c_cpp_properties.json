@@ -15,7 +15,7 @@
       ],
       "compilerPath": "C:/msys64/mingw64/bin/gcc.exe",
       "cStandard": "${default}",
-      "cppStandard": "${default}",
+      "cppStandard": "c++14",
       "intelliSenseMode": "windows-gcc-x64",
       "configurationProvider": "ms-vscode.makefile-tools"
     },

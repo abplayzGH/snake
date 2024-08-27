@@ -13,29 +13,20 @@ class Food{
     public:
     Vector2 position = {5, 6};
     Texture2D texture;
-    bool isLoaded = false;
+    
 
     Food(){
         Image image = LoadImage("Graphics/food.png");
-        if (image.data != nullptr) {
-            texture = LoadTextureFromImage(image);
-            isLoaded = true;
-        } else {
-            cerr << "Failed to load food texture!" << endl;
-        }
+        texture = LoadTextureFromImage(image);
         UnloadImage(image);
     }
 
     ~Food(){
-        if (isLoaded) {
-            UnloadTexture(texture);
-        }
+        UnloadTexture(texture);
     }
 
     void Draw(){
-        if (isLoaded) {
-            DrawTexture(texture, position.x * cellSize, position.y * cellSize, WHITE);
-        }
+        DrawTexture(texture, position.x * cellSize, position.y * cellSize, WHITE);
     }
 };
 

@@ -11,14 +11,19 @@ int cellCount = 25;
 
 class Food{
     public:
-    Vector2 position = {5, 6};
+    Vector2 position;
     Texture2D texture;
-    
 
     Food(){
         Image image = LoadImage("Graphics/food.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
+
+        if (texture.id == 0) {
+            cout << "Failed to load texture!" << endl;
+        }
+        
+        position = GenerateRandomPos();
     }
 
     ~Food(){
@@ -28,19 +33,31 @@ class Food{
     void Draw(){
         DrawTexture(texture, position.x * cellSize, position.y * cellSize, WHITE);
     }
+
+    Vector2 GenerateRandomPos(){
+        Vector2 pos;
+        pos.x = static_cast<float>(GetRandomValue(0, cellCount - 1));
+        pos.y = static_cast<float>(GetRandomValue(0, cellCount - 1));
+        return pos;
+    }
 };
 
 Food food = Food();
 
 int main(){
     cout << "Starting Game!" << endl;
-    //Init
-    InitWindow(cellSize*cellCount, cellSize*cellCount, "Snake Lol");
+
+    // Initialize Window
+    InitWindow(cellSize * cellCount, cellSize * cellCount, "Snake Game");
     SetTargetFPS(60);
 
-    //Init Objects
+    if (!IsWindowReady()) {
+    cout << "Failed to initialize window!" << endl;
+    return -1;
+}
 
-    //Game Loop
+
+    // Main Game Loop
     while (!WindowShouldClose())
     {
         BeginDrawing();
@@ -50,11 +67,10 @@ int main(){
 
         EndDrawing();
     }
-    
 
-
-    //Close
+    // Close Window and Unload Resources
+    cout << "Closing Game" << endl;
     CloseWindow();
+    
     return 0;
 }
-
